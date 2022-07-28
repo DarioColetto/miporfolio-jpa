@@ -5,7 +5,7 @@ import com.Dario.Porfolio.services.IAboutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://dariocoletto-ac579.web.app", maxAge=3600)
+@CrossOrigin(origins = "https://miporfolio-jpa.herokuapp.com", maxAge=3600)
 
 @RestController
 @RequestMapping("/about")
