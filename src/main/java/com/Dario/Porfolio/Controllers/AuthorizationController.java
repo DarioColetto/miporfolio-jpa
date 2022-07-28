@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge=3600)
+@CrossOrigin(origins = "https://dariocoletto-ac579.web.app", maxAge=3600)
 
 @RestController
 @RequestMapping("/authorize")
