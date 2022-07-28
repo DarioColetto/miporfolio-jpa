@@ -14,7 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "https://miporfolio-jpa.herokuapp.com/", maxAge=3600)
+@CrossOrigin(origins = "http://localhost:4200", maxAge=3600)
 
 @RestController
 @RequestMapping("/authorize")
@@ -34,28 +34,30 @@ public class AuthorizationController {
     @Value("${my.signature}")
     String signature;
 
-    @PostMapping(value="/{username}" , produces= MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping( produces= MediaType.APPLICATION_JSON_VALUE)
 
-    public @ResponseBody ResponseEntity<?> authorize(@PathVariable String username,
+    public @ResponseBody ResponseEntity<?> authorize(
                                     @RequestBody @NotNull User new_user
                                                      ) {
-        //Creates the token
-        String token_str = String.format(header, ".", payload, ".", signature);
 
+        String token_str;
 
-        //Creates JSonObject and ads the k:v
         JSONObject token_json= new JSONObject();
-        token_json.put("token", token_str);
+
 
         //Logic for response
-        User current_user = iUserService.findByUsername(username);
+        User current_user = iUserService.findByUsername(new_user.getUsername());
 
         if (new_user.getPassword().equals(current_user.getPassword()) && new_user.getEmail().equals(current_user.getEmail())){
-            return ResponseEntity.status(HttpStatus.OK).body(token_json.toString());
+            token_str = header + "." + payload + "." + signature;
+
         }
         else {
-            return null;
+            token_str = "";
         }
+
+        token_json.put("response", token_str);
+        return ResponseEntity.status(HttpStatus.OK).body(token_json.toString());
     }
 
 

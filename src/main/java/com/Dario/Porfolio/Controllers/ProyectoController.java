@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-
-@CrossOrigin(origins = "https://miporfolio-jpa.herokuapp.com/", maxAge=3600)
+//    https://miporfolio-jpa.herokuapp.com/
+@CrossOrigin(origins = "http://localhost:4200", maxAge=3600)
 @RestController
 @RequestMapping("/proyecto")
 public class ProyectoController {
